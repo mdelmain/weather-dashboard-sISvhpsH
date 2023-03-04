@@ -21,26 +21,88 @@
 
 
     <main>
-        <div>
-            <h3>Search for a City:</h3>
-            <form id="city-search">
-              <input id="city-name" type="text"/>
-              <button type="submit" class="btn">Search</button>
-            </form>
-          </div>
+        <div class="">
+            <div class="row">
+                <div class="col-3">
+                    <h3>Search for a City:</h3>
+                    <form id="city-search">
+                        <input id="city-name" type="text" />
+                        <button type="submit" class="btn">Search</button>
+                    </form>
+                </div>
 
-          <div>
-            <h2><span id="current-weather-city"></span> <img id="icon"></img>
-            </h2>
-            <p id="temp"></p>
-            <p id="wind"></p>
-            <p id="humidity"></p>
-          </div>
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col" class="card-body">
+                            <h2 id="current-weather-city"></h2>
+                            <img id="icon"></img>
+                            <p id="temp"></p>
+                            <p id="wind"></p>
+                            <p id="humidity"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div id="day1" class="card-body  bg-primary">
+                                <h3 class="day"></h3>
+                                <img class="icon"></img>
+                                <p class="temp"></p>
+                                <p class="wind"></p>
+                                <p class="humidity"></p>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div id="day2" class="card-body">
+                                <h3 class="day"></h3>
+                                <img class="icon"></img>
+                                <p class="temp"></p>
+                                <p class="wind"></p>
+                                <p class="humidity"></p>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div id="day3" class="card-body">
+                                <h3 class="day"></h3>
+                                <img class="icon"></img>
+                                <p class="temp"></p>
+                                <p class="wind"></p>
+                                <p class="humidity"></p>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div id="day4" class="card-body">
+                                <h3 class="day"></h3>
+                                <img class="icon"></img>
+                                <p class="temp"></p>
+                                <p class="wind"></p>
+                                <p class="humidity"></p>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div id="day5" class="card-body">
+                                <h3 class="day"></h3>
+                                <img class="icon"></img>
+                                <p class="temp"></p>
+                                <p class="wind"></p>
+                                <p class="humidity"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+        integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/plugin/utc.js"></script>
+    <script>dayjs.extend(window.dayjs_plugin_utc)</script>
     <script src="./Assets/js/script.js"></script>
 </body>
 
