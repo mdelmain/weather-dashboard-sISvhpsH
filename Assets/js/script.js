@@ -11,6 +11,7 @@ function formSubmitHandler() {
 
     var cityName = $("#city-name").get(0).value;
     getCoordinates(cityName);
+    //$("#current-weather-city").text(cityName + "," );
   });
 }
 
@@ -25,9 +26,12 @@ function getCoordinates(cityName) {
     .then(function (data) {
         var lat = data[0].lat;
         var lon = data[0].lon;
+        console.log({data});
         console.log(lat);
         console.log(lon);
         getCurrentWeather(lat, lon);
+        var today = dayjs().format("MM/DD/YY")
+        $("#current-weather-city").text(data[0].name + ", " + data[0].state + " (" + today +  ")");
     });
 }
 
@@ -50,10 +54,14 @@ function getCurrentWeather(lat, lon) {
         console.log(temp);
         console.log(wind);
         console.log(humidity);
+        updateCurrentWeatherContainer (icon, temp, wind, humidity);
     });
 
 }
 
-function updateCurrentWeatherContainer () {
-
+function updateCurrentWeatherContainer (icon, temp, wind, humidity) {
+    $("#icon").attr("src", icon);
+    $("#temp").text("Temp: " + temp + "°F");
+    $("#wind").text("Wind: " + wind + " MPH");
+    $("#humidity").text("Humidity: " + humidity + " %");
 }
