@@ -19,27 +19,27 @@
         <h1 class="text-center text-white bg-dark" style="padding: 16px;">Weather Dashboard</h1>
     </header>
 
-
     <main>
         <div class="">
             <div class="row">
                 <div class="col-3" style="padding: 16px;">
-                    <h3>Search for a City:</h3>
-                    <form class="form-group" id="city-search">
+                    <h3 style="padding-left: 16px;">Search for a City:</h3>
+                    <form class="form-group d-flex flex-column p-3" id="city-search" >
                         <input id="city-name" type="text" />
-                       <button type="submit" class="btn btn-dark ">Search </button>
+                       <button type="submit" class="btn btn-dark mt-2">Search </button>
                     </form>
+                    <div class="city-history d-flex flex-column border-top" style="padding: 16px;"></div>
                 </div>
                 
-                <div class="col-8 ">
+                <div class="col-8">
                     <div class="row">
                         <div class="col card-body">
-                            <div class="border border-dark" style="padding: 16px;" >
+                            <div id="current-city-container" class="border border-dark" style="padding: 16px;" >
                             <h2 id="current-weather-city"></h2>
                             <img id="icon"></img>
                             <p id="temp"></p>
                             <p id="wind"></p>
-                            <p id="humidity"></p>
+                            <p id="humidity" class="mb-0"></p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 <img class="icon"></img>
                                 <p class="temp"></p>
                                 <p class="wind"></p>
-                                <p class="humidity"></p>
+                                <p class="humidity mb-0"></p>
                             </div>
                         </div>
 
@@ -61,7 +61,7 @@
                                 <img class="icon"></img>
                                 <p class="temp"></p>
                                 <p class="wind"></p>
-                                <p class="humidity"></p>
+                                <p class="humidity mb-0"></p>
                             </div>
                         </div>
 
@@ -71,7 +71,7 @@
                                 <img class="icon"></img>
                                 <p class="temp"></p>
                                 <p class="wind"></p>
-                                <p class="humidity"></p>
+                                <p class="humidity mb-0"></p>
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
                                 <img class="icon"></img>
                                 <p class="temp"></p>
                                 <p class="wind"></p>
-                                <p class="humidity"></p>
+                                <p class="humidity mb-0"></p>
                             </div>
                         </div>
 
@@ -91,12 +91,11 @@
                                 <img class="icon"></img>
                                 <p class="temp"></p>
                                 <p class="wind"></p>
-                                <p class="humidity"></p>
+                                <p class="humidity mb-0"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-2 "></div>
             </div>
         </div>
     </main>
