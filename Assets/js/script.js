@@ -7,6 +7,7 @@ $(function () {
   removeStylingIfEmpty();
 });
 
+// Save city name from search and pass to getCoordinate function
 function formSubmitHandler() {
   $(".btn").click(function (event) {
     event.preventDefault();
@@ -35,7 +36,7 @@ function saveCityToHistory(city) {
     cityHistory.splice(cityIndex, 1);
   }
 
-  // Add city to the front of the list
+  // Add last searched city to the top of the list
   cityHistory.unshift(city);
 
   // Remove any cities that go over city history limit
@@ -69,11 +70,10 @@ function loadCityHistory() {
   }
 }
 
+// Gets latitude and longitude using city name and country code. Updates city name and date for current city container that displays current weather 
 function getCoordinates(cityName) {
-  console.log(cityName);
   var apiUrl =
     "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + countryCode + "&limit=1&appid=" + APIKey;
-  console.log(apiUrl);
 
   fetch(apiUrl)
     .then(function (response) {
@@ -82,9 +82,6 @@ function getCoordinates(cityName) {
     .then(function (data) {
       var lat = data[0].lat;
       var lon = data[0].lon;
-      console.log({ data });
-      console.log(lat);
-      console.log(lon);
       getCurrentWeather(lat, lon);
       getFiveDayForecast(lat, lon);
       var today = dayjs().format("MM/DD/YY");
@@ -98,35 +95,26 @@ function getCoordinates(cityName) {
     });
 }
 
+// Saves temp, wind, humidity, and the icon for the current city weather
 function getCurrentWeather(lat, lon) {
   var apiUrl =
-    "https://api.openweathermap.org/data/2.5/weather?lat=" +
-    lat +
-    "&lon=" +
-    lon +
-    "&units=imperial&appid=" +
-    APIKey;
-  console.log("getcurrent", apiUrl);
+    "https://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIKey;
 
   fetch(apiUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       var temp = data.main.temp;
       var wind = data.wind.speed;
       var humidity = data.main.humidity;
       var iconcode = data.weather[0].icon;
       var icon = "http://openweathermap.org/img/w/" + iconcode + ".png";
-      console.log(icon);
-      console.log(temp);
-      console.log(wind);
-      console.log(humidity);
       updateCurrentWeatherContainer(icon, temp, wind, humidity);
     });
 }
 
+// Updates temp, wind, humidity, and the icon for the current city container
 function updateCurrentWeatherContainer(icon, temp, wind, humidity) {
   $("#icon").attr("src", icon);
   $("#temp").text("Temp: " + temp + "°F");
@@ -134,6 +122,7 @@ function updateCurrentWeatherContainer(icon, temp, wind, humidity) {
   $("#humidity").text("Humidity: " + humidity + " %");
 }
 
+// Saves five day forecast for the city using the latitude and longitude
 function getFiveDayForecast(lat, lon) {
   var apiUrl =
     "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIKey;
@@ -143,13 +132,7 @@ function getFiveDayForecast(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-      console.log("test");
-      console.log({ label: "test", data });
-      console.log("test", data.list[3].dt);
-      //var date =  dayjs.unix(data.list[3].dt).format("MM/DD/YY")
-      //console.log("date", date);
-
-      //console.log("today", currentDateObject);
+     
       for (var i = 1; i <= 5; i++) {
         var dayForecast = getDayForecast(i, data);
         var date = dayjs.unix(dayForecast.dt).format("MM/DD/YY");
@@ -163,18 +146,20 @@ function getFiveDayForecast(lat, lon) {
     });
 }
 
+// Returns the weather data for each forecast day
 function getDayForecast(days, data) {
   var targetDateObject = dayjs().utc().hour(12).minute(0).second(0).millisecond(0).add(days, "day");
-  
+
   for (var i = 0; i < data.list.length; i++) {
     var forecastDateObject = dayjs.unix(data.list[i].dt);
-    //console.log("forecastdate",  forecastDateObject);
+    
     if (forecastDateObject >= targetDateObject) {
       return data.list[i];
     }
   }
 }
 
+// Displays five day forecast for the city
 function updateForecastWeatherContainer(id, date, icon, temp, wind, humidity) {
   $("#day" + id + " .day").text(date);
   $("#day" + id + " .icon").attr("src", icon);
@@ -188,11 +173,10 @@ function updateForecastWeatherContainer(id, date, icon, temp, wind, humidity) {
   $("#day5").addClass("text-white bg-dark");
 }
 
+// Removes styling if no city is selected
 function removeStylingIfEmpty() {
-  console.log("currentcity", $("#current-weather-city"));
   var currentWeatherCity = $("#current-weather-city");
   if (currentWeatherCity.is(":empty")) {
-    console.log("empty");
     $("#current-city-container").removeClass("border border-dark");
     $("#day1").removeClass("text-white bg-dark");
     $("#day2").removeClass("text-white bg-dark");
