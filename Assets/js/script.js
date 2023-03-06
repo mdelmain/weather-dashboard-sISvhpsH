@@ -110,7 +110,7 @@ function getCurrentWeather(lat, lon) {
       var wind = data.wind.speed;
       var humidity = data.main.humidity;
       var iconcode = data.weather[0].icon;
-      var icon = "http://openweathermap.org/img/w/" + iconcode + ".png";
+      var icon = "https://openweathermap.org/img/w/" + iconcode + ".png";
       updateCurrentWeatherContainer(icon, temp, wind, humidity);
     });
 }
