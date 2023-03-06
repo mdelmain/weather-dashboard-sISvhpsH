@@ -73,7 +73,7 @@ function loadCityHistory() {
 // Gets latitude and longitude using city name and country code. Updates city name and date for current city container that displays current weather 
 function getCoordinates(cityName) {
   var apiUrl =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + countryCode + "&limit=1&appid=" + APIKey;
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + cityName + "," + countryCode + "&limit=1&appid=" + APIKey;
 
   fetch(apiUrl)
     .then(function (response) {
@@ -142,7 +142,7 @@ function getFiveDayForecast(lat, lon) {
         var wind = dayForecast.wind.speed;
         var humidity = dayForecast.main.humidity;
         var iconcode = dayForecast.weather[0].icon;
-        var icon = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        var icon = "https://openweathermap.org/img/w/" + iconcode + ".png";
         updateForecastWeatherContainer(i, date, icon, temp, wind, humidity);
       }
     });
