@@ -85,6 +85,7 @@ function getCoordinates(cityName) {
       getCurrentWeather(lat, lon);
       getFiveDayForecast(lat, lon);
       var today = dayjs().format("MM/DD/YY");
+      console.log("today", today)
       var location = data[0].state ?? data[0].country;
       $("#current-weather-city").text(
         data[0].name + ", " + location + " (" + today + ")"
@@ -132,10 +133,11 @@ function getFiveDayForecast(lat, lon) {
       return response.json();
     })
     .then(function (data) {
-     
+     console.log(data);
       for (var i = 1; i <= 5; i++) {
         var dayForecast = getDayForecast(i, data);
         var date = dayjs.unix(dayForecast.dt).format("MM/DD/YY");
+        console.log("date", date);
         var temp = dayForecast.main.temp;
         var wind = dayForecast.wind.speed;
         var humidity = dayForecast.main.humidity;
@@ -148,8 +150,8 @@ function getFiveDayForecast(lat, lon) {
 
 // Returns the weather data for each forecast day
 function getDayForecast(days, data) {
-  var targetDateObject = dayjs().utc().hour(12).minute(0).second(0).millisecond(0).add(days, "day");
-
+  var targetDateObject = dayjs().hour(12).minute(0).second(0).millisecond(0).add(days, "day");
+console.log('target', targetDateObject)
   for (var i = 0; i < data.list.length; i++) {
     var forecastDateObject = dayjs.unix(data.list[i].dt);
     
